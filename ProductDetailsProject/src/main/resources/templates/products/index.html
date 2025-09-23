@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Product Store Brothers</title>
+    <style>
+        @font-face{
+        font-family:devil;
+        src=url(Font/metal-macabre/MetalMacabre.ttf);
+        }
+        *{padding: 0; margin: 0; box-sizing: border-box;}
+body{height: 900px;}
+header {
+  background: url('http://www.autodatz.com/wp-content/uploads/2017/05/Old-Car-Wallpapers-Hd-36-with-Old-Car-Wallpapers-Hd.jpg');
+  text-align: center;
+  width: 100%;
+  height: auto;
+  background-size: cover;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0 0 85% 85% / 30%;
+}
+header .overlay{
+  width: 100%;
+  height: 100%;
+  padding: 50px;
+  color: #FFF;
+  text-shadow: 1px 1px 1px #333;
+  background-image: linear-gradient( 135deg, #e66465 10%, #9198e5 100%);
+
+}
+
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 80px;
+  margin-bottom: 30px;
+}
+
+h3, p {
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 30px;
+}
+
+button {
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  color: #333;
+  background: #fff;
+  margin-bottom: 50px;
+  box-shadow: 0 3px 20px 0 #0000003b;
+}
+button:hover{
+  cursor: pointer;
+}
+    </style>
+    <script>
+        /* font-family: 'Kaushan Script', cursive; */
+/* font-family: 'Pinyon Script', cursive; */
+/* font-family: 'Petit Formal Script', cursive; */
+/* font-family: 'Aguafina Script', cursive; */
+/* font-family: 'Rouge Script', cursive; */
+// font-family: 'Roboto', sans-serif;
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<header>
+    <div class="overlay">
+        <h1>Bike List</h1>
+        <h3>Checkout these beasts in there own world!!!!!</h3>
+        <p>Owning a bike not only is your chariot but it also shows once passion, dignity, thrill addictness, power.......so choose one today and upgarde your life.</p>
+        <br>
+        <a href="/products/create"><button>Create Products</button></a>
+    </div>
+</header>
+<div class="Container">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Brand</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Image</th>
+            <th>Created At</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product:${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.brand}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="@{${product.price}+'Rs'}"></td>
+            <td>
+                <img th:src="@{'/'+ ${product.imageFileName}}" alt="..." height="100" width="200">
+            </td>
+            <td th:text="${product.createdAt.toString().substring(0,10)}"></td>
+            <td style="white-space:nowrap">
+                <a class="btn btn-primary btn-sm" th:href="@{/products/edit(id=${product.id})}">Edit</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/products/delete(id=${product.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>
